@@ -5,7 +5,7 @@ export default function useDeviceDetect(
     desktopBreakpoint: number
 ) {
     const [isMobile, setIsMobile] = useState(false)
-    const [isDesktop, setIsDesktop] = useState(false)
+    const [isDesktop, setIsDesktop] = useState(true)
 
     const getWindowWidth = () =>
         window.innerWidth ||
@@ -22,6 +22,6 @@ export default function useDeviceDetect(
         return () => {
             window.removeEventListener('resize', resizeListener)
         }
-    })
+    }, [isMobile, isDesktop, mobileBreakpoint, desktopBreakpoint])
     return { isMobile, isDesktop }
 }

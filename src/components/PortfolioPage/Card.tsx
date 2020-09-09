@@ -14,12 +14,12 @@ const Card = ({ project }: { project: Project }) => {
 
     return (
         <ItemWrapper>
-            {isDesktop ? (
-                <>
-                    <ItemHeader onClick={toggle}>
-                        <ProjectName>{projectInfo.name}</ProjectName>
-                    </ItemHeader>
-                    <ItemBody display={isVisible}>
+            <ItemHeader onClick={toggle}>
+                <h3>{projectInfo.name}</h3>
+            </ItemHeader>
+            <ItemBody display={isVisible}>
+                {isDesktop ? (
+                    <>
                         <Column>
                             {!!project.imgSrc && (
                                 <Img
@@ -44,44 +44,32 @@ const Card = ({ project }: { project: Project }) => {
                             </div>
                             <CardShow project={project} />
                         </Column>
-                    </ItemBody>
-                </>
-            ) : (
-                <>
-                    <ItemHeader onClick={toggle}>
-                        <ProjectName>{projectInfo.name}</ProjectName>
-                    </ItemHeader>
-                    <ItemBody display={isVisible}>
-                        <Column>
-                            {!!project.imgSrc && (
-                                <Img
-                                    src={project.imgSrc}
-                                    alt={projectInfo.name}
-                                />
-                            )}
-                            {!!projectInfo.description && (
-                                <CardDescription>
-                                    Lorem ipsum dolor sit amet
-                                    consectetur adipisicing elit.
-                                    Nobis expedita optio possimus
-                                    excepturi vitae asperiores cum
-                                    mollitia in voluptatem hic.
-                                    {projectInfo.description}
-                                </CardDescription>
-                            )}
-                            <div>
-                                <ToolsIntro>
-                                    {content.portfolio.toolsIntro}
-                                </ToolsIntro>
-                                <CardDescription>
-                                    {project.tools}
-                                </CardDescription>
-                            </div>
-                            <CardShow project={project} />
-                        </Column>
-                    </ItemBody>
-                </>
-            )}
+                    </>
+                ) : (
+                    <Column>
+                        {!!project.imgSrc && (
+                            <Img
+                                src={project.imgSrc}
+                                alt={projectInfo.name}
+                            />
+                        )}
+                        {!!projectInfo.description && (
+                            <CardDescription>
+                                {projectInfo.description}
+                            </CardDescription>
+                        )}
+                        <div>
+                            <ToolsIntro>
+                                {content.portfolio.toolsIntro}
+                            </ToolsIntro>
+                            <CardDescription>
+                                {project.tools}
+                            </CardDescription>
+                        </div>
+                        <CardShow project={project} />
+                    </Column>
+                )}
+            </ItemBody>
         </ItemWrapper>
     )
 }
@@ -114,8 +102,6 @@ const Column = styled.div`
         width: 50%;
     }
 `
-
-const ProjectName = styled.h3``
 
 const CardDescription = styled.p`
     padding: 0 2em;
