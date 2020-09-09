@@ -32,7 +32,7 @@ export default [
         tools:
             'React, React Hooks, Styled-components, React Router, Recharts',
         imgSrc: lifeTrackerApp,
-        demoUrl: 'https://doryski.github.io/life-tracker-app/',
+        demoUrl: 'https://life-tracker-react-app.herokuapp.com/',
         codeUrl: 'https://github.com/Doryski/life-tracker-app',
     },
     {
