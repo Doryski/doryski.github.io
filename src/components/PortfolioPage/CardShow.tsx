@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../../context'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Button } from '../shared/Button'
 import { Project } from '../../types'
@@ -12,16 +11,22 @@ const CardShow = ({ project }: { project: Project }) => {
         <Wrapper>
             <ShowIntro>{content.portfolio.show.showIntro}</ShowIntro>
             <List>
-                <Link to={project.demoUrl}>
-                    <IntroButton>
-                        {content.portfolio.show.showDemo}
-                    </IntroButton>
-                </Link>
-                <Link to={project.codeUrl}>
-                    <IntroButton>
-                        {content.portfolio.show.showCode}
-                    </IntroButton>
-                </Link>
+                <IntroButton
+                    as='a'
+                    href={project.demoUrl}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                >
+                    {content.portfolio.show.showDemo}
+                </IntroButton>
+                <IntroButton
+                    as='a'
+                    href={project.codeUrl}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                >
+                    {content.portfolio.show.showCode}
+                </IntroButton>
             </List>
         </Wrapper>
     )
