@@ -5,9 +5,9 @@ export const Button = styled.button`
     text-align: center;
     padding: ${({ theme }) =>
         `${theme.padding.medium} ${theme.padding.large}`};
-    background: ${({ theme }) => theme.colors.secondary};
-    border: 2px solid ${({ theme }) => theme.colors.secondary};
+    background: ${({ theme }) => theme.colors.primary};
+    border: 2px solid ${({ theme }) => theme.colors.primary};
     &:hover {
-        background: ${({ theme }) => theme.colors.primarySecondary};
+        background: ${({ theme }) => theme.colors.secondary};
     }
 `

@@ -5,15 +5,13 @@ export default async function postMessage(
     failureFn: Function
 ) {
     try {
-        const response = await fetch(url, {
+        await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
         })
-        console.log(response)
-        // response.json())
         successFn()
     } catch (error) {
         failureFn()

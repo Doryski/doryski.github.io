@@ -56,7 +56,7 @@ const Header = () => {
 }
 const HeaderWrapper = styled.header`
     height: 10vh;
-    background: ${({ theme }) => theme.colors.secondary};
+    background: ${({ theme }) => theme.colors.primary};
     align-items: center;
     position: relative;
 `

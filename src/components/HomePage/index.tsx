@@ -87,8 +87,7 @@ export const CallToAction = styled(Button)`
     &:last-of-type {
         background: transparent;
         &:hover {
-            background: ${({ theme }) =>
-                theme.colors.primarySecondary};
+            background: ${({ theme }) => theme.colors.secondary};
         }
     }
     @media only screen and (min-width: 900px) {

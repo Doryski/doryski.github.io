@@ -72,7 +72,7 @@ const Link = styled(RouteLink)`
         padding: 0 ${({ theme }) => theme.padding.xxl};
         max-width: 150px;
         &:hover {
-            background: ${({ theme }) => theme.colors.primary};
+            background: ${({ theme }) => theme.colors.secondary};
         }
     }
 `

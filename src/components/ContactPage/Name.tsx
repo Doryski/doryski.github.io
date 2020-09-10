@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../../context'
-import { Input, Label, Row, Small } from './FormComponents'
+import { Input, Label, Row, Error } from './FormComponents'
 import { InputProps } from '../../types'
 
 const Name = ({ errors, register }: InputProps) => {
@@ -16,7 +16,7 @@ const Name = ({ errors, register }: InputProps) => {
                 })}
             />
             {errors.name && errors.name.type === 'required' && (
-                <Small>{content.contact.errors.name}</Small>
+                <Error>{content.contact.errors.name}</Error>
             )}
         </Row>
     )

@@ -18,7 +18,7 @@ export const Input = styled.input`
     font-size: 1em;
     width: 100%;
     height: 3em;
-    border: 1px solid ${({ theme }) => theme.colors.secondary};
+    border: 1px solid ${({ theme }) => theme.colors.primary};
     padding-left: 0.3em;
     box-shadow: none;
     @media only screen and (min-width: 900px) {
@@ -39,7 +39,6 @@ export const Label = styled.label`
         top: -13px;
     }
 `
-export const Column = styled.section``
 
 export const Row = styled.section`
     position: relative;
@@ -56,19 +55,23 @@ export const Row = styled.section`
     }
 `
 
-export const Small = styled.span`
+export const Error = styled.span<{ fontSize?: string }>`
     color: rgb(207, 0, 0);
     font-weight: bold;
-    font-size: 0.8em;
+    font-size: ${({ fontSize }) => fontSize || '0.8rem'};
     @media only screen and (min-width: 900px) {
         margin-top: 0.3em;
     }
+`
+
+export const Success = styled(Error)`
+    color: rgb(0, 160, 0);
 `
 export const Textarea = styled.textarea`
     resize: none;
     font-size: 1em;
     width: 100%;
-    border: 1px solid ${({ theme }) => theme.colors.secondary};
+    border: 1px solid ${({ theme }) => theme.colors.primary};
     padding: 0.3em;
     box-shadow: none;
     @media only screen and (min-width: 900px) {

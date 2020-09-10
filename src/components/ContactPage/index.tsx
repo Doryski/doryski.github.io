@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { GlobalContext } from '../../context'
 import SectionName from '../shared/SectionName'
 import { useForm } from 'react-hook-form'
@@ -6,20 +6,22 @@ import SubmitForm from './SubmitForm'
 import Message from './Message'
 import Email from './Email'
 import Name from './Name'
-import { Form, Column } from './FormComponents'
+import { Form, Success, Error } from './FormComponents'
 import postMessage from '../../helpers/postMessage'
 import PageWrapper from '../shared/PageWrapper'
 
 const ContactPage = () => {
     const { content, isMobile } = useContext(GlobalContext)
     const { register, handleSubmit, errors, reset } = useForm()
+    const [success, setSuccess] = useState(false)
+    const [failure, setFailure] = useState(false)
 
     const onSubmit = handleSubmit(data => {
         postMessage(
             'https://formspree.io/xvorpadg',
             data,
-            () => alert(content.contact.success),
-            () => alert(content.contact.failure)
+            () => setSuccess(true),
+            () => setFailure(true)
         )
         reset()
     })
@@ -40,7 +42,7 @@ const ContactPage = () => {
                     </>
                 ) : (
                     <>
-                        <Column>
+                        <section>
                             <Name
                                 errors={errors}
                                 register={register}
@@ -49,14 +51,24 @@ const ContactPage = () => {
                                 errors={errors}
                                 register={register}
                             />
-                        </Column>
-                        <Column>
+                        </section>
+                        <section>
                             <Message
                                 errors={errors}
                                 register={register}
                             />
                             <SubmitForm />
-                        </Column>
+                            {success && (
+                                <Success fontSize='1rem'>
+                                    {content.contact.success}
+                                </Success>
+                            )}
+                            {failure && (
+                                <Error fontSize='1rem'>
+                                    {content.contact.failure}
+                                </Error>
+                            )}
+                        </section>
                     </>
                 )}
             </Form>

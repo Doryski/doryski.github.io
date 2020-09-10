@@ -86,7 +86,7 @@ const ItemHeader = styled.section`
     padding: 1em 0;
     cursor: pointer;
     text-align: center;
-    background: ${({ theme }) => theme.colors.secondary};
+    background: ${({ theme }) => theme.colors.primary};
 `
 const ItemBody = styled.article<{ display: boolean }>`
     display: ${({ display }) => (display ? 'flex' : 'none')};

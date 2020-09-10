@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../../context'
-import { Input, Label, Row, Small } from './FormComponents'
+import { Input, Label, Row, Error } from './FormComponents'
 import { EMAIL_REGEX } from '../../helpers/utils'
 import { InputProps } from '../../types'
 
@@ -18,10 +18,10 @@ const Email = ({ errors, register }: InputProps) => {
                 })}
             />
             {errors.email && errors.email.type === 'required' && (
-                <Small>{content.contact.errors.email}</Small>
+                <Error>{content.contact.errors.email}</Error>
             )}
             {errors.email && errors.email.type === 'pattern' && (
-                <Small>{content.contact.errors.emailPattern}</Small>
+                <Error>{content.contact.errors.emailPattern}</Error>
             )}
         </Row>
     )

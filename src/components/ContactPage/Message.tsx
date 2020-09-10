@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../../context'
 import {
-    Small,
+    Error,
     TextareaLabel,
     TextareaRow,
     Textarea,
@@ -23,7 +23,7 @@ const Message = ({ errors, register }: InputProps) => {
                 ref={register({ required: true })}
             />
             {errors.message && (
-                <Small>{content.contact.errors.message}</Small>
+                <Error>{content.contact.errors.message}</Error>
             )}
         </TextareaRow>
     )
