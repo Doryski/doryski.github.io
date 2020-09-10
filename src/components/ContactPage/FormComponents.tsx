@@ -53,9 +53,6 @@ export const Row = styled.section`
             margin-top: 1.5em;
             width: auto;
         }
-        &:last-of-type {
-            display: block;
-        }
     }
 `
 
