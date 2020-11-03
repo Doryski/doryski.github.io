@@ -19,7 +19,6 @@ const Header = () => {
         close,
     } = useDialogHandler(false)
     useHandleMobileMenu([burgerRef, menuRef], close)
-
     return (
         <HeaderWrapper>
             {isMobile ? (

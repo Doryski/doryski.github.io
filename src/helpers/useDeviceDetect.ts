@@ -4,24 +4,27 @@ export default function useDeviceDetect(
     mobileBreakpoint: number,
     desktopBreakpoint: number
 ) {
-    const [isMobile, setIsMobile] = useState(false)
-    const [isDesktop, setIsDesktop] = useState(true)
-
     const getWindowWidth = () =>
         window.innerWidth ||
         document.documentElement.clientWidth ||
         document.body.clientWidth
 
+    const isMobileWidth = () => getWindowWidth() < mobileBreakpoint
+    const isDesktopWidth = () => getWindowWidth() > desktopBreakpoint
+
+    const [isMobile, setIsMobile] = useState(isMobileWidth())
+    const [isDesktop, setIsDesktop] = useState(isDesktopWidth())
+
     useEffect(() => {
         const resizeListener = () => {
-            setIsMobile(getWindowWidth() < mobileBreakpoint)
-            setIsDesktop(getWindowWidth() > desktopBreakpoint)
+            setIsMobile(isMobileWidth())
+            setIsDesktop(isDesktopWidth())
         }
         window.addEventListener('resize', resizeListener)
 
         return () => {
             window.removeEventListener('resize', resizeListener)
         }
-    }, [isMobile, isDesktop, mobileBreakpoint, desktopBreakpoint])
+    }, [])
     return { isMobile, isDesktop }
 }
