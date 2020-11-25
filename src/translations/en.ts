@@ -13,14 +13,12 @@ export default {
         },
     },
     portfolio: {
-        sectionName: 'Chosen projects',
-        zoomBtn: 'Click to zoom in',
-        toolsIntro: 'Tools used:',
+        sectionName: 'Latest works',
         show: {
-            showIntro: 'Show me:',
-            showDemo: 'DEMO',
+            showSite: 'VIEW',
             showCode: 'CODE',
         },
+        showMore: 'Show more projects',
     },
     contact: {
         sectionName: 'Contact me',
@@ -36,5 +34,8 @@ export default {
         submit: 'Send message',
         success: 'Your message was sent successfully!',
         failure: 'Something went wrong! Try again',
+    },
+    footer: {
+        createdBy: 'Created by',
     },
 }

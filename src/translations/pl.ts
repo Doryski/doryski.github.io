@@ -13,14 +13,12 @@ export default {
         },
     },
     portfolio: {
-        sectionName: 'Wybrane projekty',
-        zoomBtn: 'Kliknij, aby przybliżyć',
-        toolsIntro: 'Wykorzystane narzędzia:',
+        sectionName: 'Ostatnie projekty',
         show: {
-            showIntro: 'Pokaż mi:',
-            showDemo: 'DEMO',
+            showSite: 'ZOBACZ',
             showCode: 'KOD',
         },
+        showMore: 'Pokaż więcej projektów',
     },
     contact: {
         sectionName: 'Kontakt e-mail',
@@ -36,5 +34,8 @@ export default {
         submit: 'Wyślij wiadomość',
         success: 'Twoja wiadomość została wysłana pomyślnie!',
         failure: 'Coś poszło nie tak! Spróbuj ponownie',
+    },
+    footer: {
+        createdBy: 'Stworzone przez',
     },
 }
