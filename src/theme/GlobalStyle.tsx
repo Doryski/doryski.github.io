@@ -7,9 +7,12 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
         font-family: 'Montserrat';
         src: url(${Montserrat});
     }
-    
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Montserrat', sans-serif !important;
     }
 
     *, *::before, *::after {
@@ -35,6 +38,7 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
 
     input, input::placeholder, textarea, button {
         font-family: inherit;
+        outline: none;
     }
 `
 

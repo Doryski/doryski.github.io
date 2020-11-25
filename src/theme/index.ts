@@ -4,7 +4,9 @@ const theme = {
         secondary: '#f3d9bc',
         indigo: '#540D6E',
         light: '#e6e6e4',
-        dark: '#080705',
+        dark: '#201e1e',
+        background: '#f3f4f9',
+        cardBg: 'white',
     },
     padding: {
         small: '.4em',
@@ -24,6 +26,8 @@ const theme = {
         900: '@media only screen and (min-width: 900px)',
         desktop: '@media only screen and (min-width: 1024px)',
     },
+    header: '10vh',
+    footer: '5vh',
 }
 export type ThemeType = typeof theme
 
