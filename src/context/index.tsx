@@ -3,8 +3,11 @@ import translationPL from '../translations/pl'
 import translationEN from '../translations/en'
 import useDeviceDetect from '../helpers/useDeviceDetect'
 import { ContextType } from '../types'
+
+const initLanguage = window.navigator.language === 'pl' ? 'pl' : 'en'
+
 const initialContext = {
-    language: 'pl',
+    language: initLanguage,
     isMobile: false,
     isDesktop: false,
     changeLanguage: (
@@ -21,10 +24,16 @@ const GlobalContextProvider = ({
 }: {
     children: React.ReactNode
 }) => {
-    const [language, setLanguage] = useState('pl')
+    const [language, setLanguage] = useState(initLanguage)
     const { isMobile, isDesktop } = useDeviceDetect(760, 900)
-    const changeLanguage = (e: any) =>
-        setLanguage(e.target.dataset.language)
+
+    const changeLanguage = (
+        e: React.MouseEvent<HTMLImageElement, MouseEvent>
+    ) => {
+        const { language } = (e.target as HTMLImageElement).dataset
+        if (!!language) return setLanguage(language)
+        return
+    }
 
     const content =
         !!translationEN && language === 'en'
