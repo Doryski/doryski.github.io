@@ -1,15 +1,25 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../../context'
-import { Input, Label, Row, Error } from './FormComponents'
+import {
+    Row,
+    Error,
+    LabelText,
+    EmailLabel,
+    EmailInput,
+} from './FormComponents'
 import { EMAIL_REGEX } from '../../helpers/utils'
 import { InputProps } from '../../types'
+import { MdEmail } from 'react-icons/md'
 
 const Email = ({ errors, register }: InputProps) => {
     const { content } = useContext(GlobalContext)
     return (
         <Row>
-            <Label htmlFor='email'>{content.contact.email}</Label>
-            <Input
+            <EmailLabel htmlFor='email'>
+                <MdEmail />
+                <LabelText>{content.contact.email}</LabelText>
+            </EmailLabel>
+            <EmailInput
                 name='email'
                 placeholder='example@address.com'
                 ref={register({

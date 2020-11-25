@@ -3,96 +3,80 @@ import { GlobalContext } from '../../context'
 import styled from 'styled-components'
 import CardShow from './CardShow'
 import { Project } from '../../types'
-import useDialogHandler from '../../helpers/useDialogHandler'
 
 const Card = ({ project }: { project: Project }) => {
-    const { language, content, isDesktop } = useContext(GlobalContext)
+    const { language, isDesktop } = useContext(GlobalContext)
     const projectInfo = language === 'en' ? project.en : project.pl
-    const { toggle, isDialogOpen: isVisible } = useDialogHandler(
-        false
+
+    const projectName = <ProjectName>{projectInfo.name}</ProjectName>
+    const cardDescription = (
+        <CardDescriptionWrapper>
+            <CardDescription>{project.tools}</CardDescription>
+        </CardDescriptionWrapper>
+    )
+    const projectImg = !!project.imgSrc && (
+        <Img src={project.imgSrc} alt={projectInfo.name} />
     )
 
     return (
         <ItemWrapper>
-            <ItemHeader onClick={toggle}>
-                <h3>{projectInfo.name}</h3>
-            </ItemHeader>
-            <ItemBody display={isVisible}>
-                {isDesktop ? (
-                    <>
-                        <Column>
-                            {!!project.imgSrc && (
-                                <Img
-                                    src={project.imgSrc}
-                                    alt={projectInfo.name}
-                                />
-                            )}
-                        </Column>
-                        <Column>
-                            {!!projectInfo.description && (
-                                <CardDescription>
-                                    {projectInfo.description}
-                                </CardDescription>
-                            )}
-                            <div>
-                                <ToolsIntro>
-                                    {content.portfolio.toolsIntro}
-                                </ToolsIntro>
-                                <CardDescription>
-                                    {project.tools}
-                                </CardDescription>
-                            </div>
-                            <CardShow project={project} />
-                        </Column>
-                    </>
-                ) : (
+            {isDesktop ? (
+                <>
+                    <Column>{projectImg}</Column>
                     <Column>
-                        {!!project.imgSrc && (
-                            <Img
-                                src={project.imgSrc}
-                                alt={projectInfo.name}
-                            />
-                        )}
-                        {!!projectInfo.description && (
-                            <CardDescription>
-                                {projectInfo.description}
-                            </CardDescription>
-                        )}
-                        <div>
-                            <ToolsIntro>
-                                {content.portfolio.toolsIntro}
-                            </ToolsIntro>
-                            <CardDescription>
-                                {project.tools}
-                            </CardDescription>
-                        </div>
+                        {projectName}
+                        {cardDescription}
                         <CardShow project={project} />
                     </Column>
-                )}
-            </ItemBody>
+                </>
+            ) : (
+                <Column>
+                    {projectImg}
+                    {projectName}
+                    {cardDescription}
+                    <CardShow project={project} />
+                </Column>
+            )}
         </ItemWrapper>
     )
 }
-const ItemWrapper = styled.div`
+export const ItemWrapper = styled.article`
     width: 80%;
     margin: 0 auto;
-    border-bottom: 2px solid transparent;
-`
-const ItemHeader = styled.section`
     display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    padding: 1em 0;
-    cursor: pointer;
-    text-align: center;
-    background: ${({ theme }) => theme.colors.primary};
+    padding: 4em 2em;
+    border-radius: 15px;
+    border: none;
+    background: white;
+    margin-top: 70px;
+    max-height: 353px;
+    &:first-of-type {
+        margin-top: 0;
+    }
+    div:last-of-type {
+        margin-left: 2em;
+    }
+    &:nth-of-type(even) {
+        flex-direction: row-reverse;
+        div:last-of-type {
+            margin-left: 0;
+            margin-right: 2em;
+        }
+    }
+    @media only screen and (max-width: 1225px) {
+        padding: 2em;
+    }
+    @media only screen and (max-width: 900px) {
+        max-height: none;
+        div {
+            margin: 0 !important;
+        }
+    }
+    @media only screen and (max-width: 400px) {
+        width: 90%;
+    }
 `
-const ItemBody = styled.article<{ display: boolean }>`
-    display: ${({ display }) => (display ? 'flex' : 'none')};
-    padding: 2em 0;
-`
-const Column = styled.div`
+export const Column = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -100,19 +84,38 @@ const Column = styled.div`
     width: 100%;
     @media only screen and (min-width: 900px) {
         width: 50%;
+        justify-content: space-between;
+        &:first-of-type {
+            justify-content: center;
+        }
+    }
+`
+export const CardDescriptionWrapper = styled.div`
+    margin: 0 !important;
+    @media only screen and (min-width: 900px) {
+        padding: 0 2em;
     }
 `
 
-const CardDescription = styled.p`
-    padding: 0 2em;
+export const CardDescription = styled.p`
     text-align: center;
+    font-size: 0.875rem;
+    color: #6f6d6b;
 `
-const ToolsIntro = styled.h4`
-    margin-top: ${({ theme }) => theme.padding.large};
-    margin-bottom: ${({ theme }) => theme.padding.small};
+export const Img = styled.img`
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+`
+export const ProjectName = styled.h1`
     text-align: center;
+    @media only screen and (max-width: 900px) {
+        padding: 1em 0;
+    }
+    @media only screen and (max-width: 370px) {
+        padding: 1em 0;
+        font-size: 1.3rem;
+    }
 `
-const Img = styled.img`
-    width: 100%;
-`
+
 export default Card

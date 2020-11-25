@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import projects from '../../store/projects'
+import ShowMore from './ShowMore'
 import Card from './Card'
-import styled from 'styled-components'
 
 const CardsWrapper = () => {
+    const [showNumber, setShowNumber] = useState(3)
+    const showMoreProjects = () =>
+        setShowNumber(showNumber => showNumber + 3)
+
     return (
-        <Wrapper>
-            {projects.map(project => (
-                // <Card key={project.pl.name} project={project} />
+        <div>
+            {projects.slice(0, showNumber).map(project => (
                 <Card key={project.pl.name} project={project} />
             ))}
-        </Wrapper>
+            {showNumber <= projects.length && (
+                <ShowMore handleClick={showMoreProjects} />
+            )}
+        </div>
     )
 }
 
-const Wrapper = styled.div`
-    padding: 0 2em;
-`
 export default CardsWrapper

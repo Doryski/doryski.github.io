@@ -5,15 +5,18 @@ import {
     TextareaLabel,
     TextareaRow,
     Textarea,
+    LabelText,
 } from './FormComponents'
 import { InputProps } from '../../types'
+import { MdMessage } from 'react-icons/md'
 
 const Message = ({ errors, register }: InputProps) => {
     const { content } = useContext(GlobalContext)
     return (
         <TextareaRow>
             <TextareaLabel htmlFor='message'>
-                {content.contact.message}
+                <MdMessage />
+                <LabelText>{content.contact.message}</LabelText>
             </TextareaLabel>
             <Textarea
                 name='message'

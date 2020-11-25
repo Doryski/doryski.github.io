@@ -1,19 +1,24 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
 import GlobalContextProvider from './context'
-import Content from './components/Content'
+import Layout from './components/Layout'
 import GlobalStyle from './theme/GlobalStyle'
 import theme from './theme'
 import { ThemeProvider } from 'styled-components'
+import { IconContext } from 'react-icons'
 
 const App = () => (
     <GlobalContextProvider>
-        <BrowserRouter>
-            <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+            <IconContext.Provider
+                value={{
+                    size: '1.5rem',
+                    className: 'react-icons',
+                }}
+            >
                 <GlobalStyle />
-                <Content />
-            </ThemeProvider>
-        </BrowserRouter>
+                <Layout />
+            </IconContext.Provider>
+        </ThemeProvider>
     </GlobalContextProvider>
 )
 

@@ -8,7 +8,7 @@ const PortfolioPage = () => {
     const { content } = useContext(GlobalContext)
 
     return (
-        <PageWrapper>
+        <PageWrapper id='portfolio'>
             <SectionName>{content.portfolio.sectionName}</SectionName>
             <CardsWrapper />
         </PageWrapper>
