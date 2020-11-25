@@ -10,12 +10,14 @@ const LangSwitch = () => {
     return (
         <StyledWrapper>
             <Flag
+                title='polski'
                 onClick={changeLanguage}
                 data-language='pl'
                 src={flagPL}
                 alt='PL'
-            />{' '}
+            />
             <Flag
+                title='english'
                 onClick={changeLanguage}
                 data-language='en'
                 src={flagUK}
@@ -24,13 +26,16 @@ const LangSwitch = () => {
         </StyledWrapper>
     )
 }
-const StyledWrapper = styled.div`
-    padding: 0 ${({ theme }) => theme.padding.medium};
+export const StyledWrapper = styled.div`
+    padding: 0 0 0 ${({ theme }) => theme.padding.medium};
     display: flex;
+    @media only screen and (max-width: 900px) {
+        padding: 0 ${({ theme }) => theme.padding.medium};
+    }
 `
-const Flag = styled.img`
+export const Flag = styled.img`
     margin: 0 0.2em;
-    width: 1.8em;
+    width: 1.3em;
     cursor: pointer;
 `
 export default LangSwitch

@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { Link as RouteLink } from 'react-router-dom'
 import { GlobalContext } from '../../context'
 import { PORTFOLIO_PATH, CONTACT_PATH } from '../../helpers/utils'
+import { MdPhotoLibrary, MdEmail } from 'react-icons/md'
+import { AiFillHome } from 'react-icons/ai'
 
 const Menu = ({
     close,
@@ -11,69 +12,100 @@ const Menu = ({
     close?: () => void
     menuRef?: React.RefObject<HTMLUListElement>
 }) => {
-    const { content } = useContext(GlobalContext)
+    const { content, isDesktop, isMobile } = useContext(GlobalContext)
+    const MENU_DATA = [
+        { href: '#', title: content.nav.home, icon: <AiFillHome /> },
+        {
+            href: PORTFOLIO_PATH,
+            title: content.nav.portfolio,
+            icon: <MdPhotoLibrary />,
+        },
+        {
+            href: CONTACT_PATH,
+            title: content.nav.contact,
+            icon: <MdEmail />,
+        },
+    ]
 
     return (
         <MenuWrapper>
             <List ref={menuRef}>
-                <li>
-                    <Link to='/' onClick={close}>
-                        {content.nav.home}
-                    </Link>
-                </li>
-                <li>
-                    <Link to={PORTFOLIO_PATH} onClick={close}>
-                        {content.nav.portfolio}
-                    </Link>
-                </li>
-                <li>
-                    <Link to={CONTACT_PATH} onClick={close}>
-                        {content.nav.contact}
-                    </Link>
-                </li>
+                {MENU_DATA.map(link => (
+                    <ListItem key={link.title}>
+                        <Link href={link.href} onClick={close}>
+                            <LinkContent>
+                                {((!isDesktop && !isMobile) ||
+                                    isMobile) &&
+                                    link.icon}
+                                <span style={{ marginLeft: '.5em' }}>
+                                    {link.title}
+                                </span>
+                            </LinkContent>
+                        </Link>
+                    </ListItem>
+                ))}
             </List>
         </MenuWrapper>
     )
 }
-const MenuWrapper = styled.div`
+export const MenuWrapper = styled.div`
     text-align: center;
-    @media only screen and (min-width: 760px) {
+    @media only screen and (min-width: 900px) {
         height: 100%;
+        padding: 0 2em;
     }
 `
-const List = styled.ul`
+export const List = styled.ul`
     width: 100%;
     position: absolute;
     display: flex;
     flex-direction: column;
-    background: ${({ theme }) => theme.colors.primary};
     z-index: 5;
-    @media only screen and (min-width: 760px) {
+    background: rgba(255, 255, 255, 0.2);
+
+    @media only screen and (min-width: 900px) {
         background: none;
         flex-direction: row;
         position: relative;
         height: 100%;
     }
 `
-const Link = styled(RouteLink)`
-    display: block;
+export const Link = styled.a`
     height: 100%;
     width: 100%;
-    font-weight: 600;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+`
+export const LinkContent = styled.span`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+
     padding: ${({ theme }) => theme.padding.medium} 0;
-    &:hover {
-        background: ${({ theme }) => theme.colors.secondary};
-    }
-    @media only screen and (min-width: 760px) {
-        width: 100%;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        padding: 0 ${({ theme }) => theme.padding.xxl};
+    margin: 0 auto;
+    width: 100%;
+    max-width: 110px;
+    font-weight: 600;
+    transition: color 0.4s;
+    @media only screen and (min-width: 900px) {
         max-width: 150px;
+        padding: 0 ${({ theme }) => theme.padding.xxl};
         &:hover {
-            background: ${({ theme }) => theme.colors.secondary};
+            color: ${({ theme }) => theme.colors.primary};
         }
     }
 `
+
+export const ListItem = styled.li`
+    @media only screen and (max-width: 900px) {
+        background: transparent;
+        transition: background-color 0.3s;
+        &:hover {
+            background: ${({ theme }) => theme.colors.primary};
+        }
+    }
+`
+
 export default Menu

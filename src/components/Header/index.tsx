@@ -4,13 +4,12 @@ import Menu from './Menu'
 import Logo from './Logo'
 import LangSwitch from './LangSwitch'
 import { GlobalContext } from '../../context'
-import { Menu as MenuIcon } from '@styled-icons/zondicons'
+import { MdMenu, MdClose } from 'react-icons/md'
 import useDialogHandler from '../../helpers/useDialogHandler'
 import useHandleMobileMenu from '../../helpers/useHandleMobileMenu'
 
 const Header = () => {
-    const { isMobile } = useContext(GlobalContext)
-
+    const { isMobile, isDesktop } = useContext(GlobalContext)
     const burgerRef = useRef<HTMLButtonElement>(null!)
     const menuRef = useRef<HTMLUListElement>(null!)
     const {
@@ -19,9 +18,10 @@ const Header = () => {
         close,
     } = useDialogHandler(false)
     useHandleMobileMenu([burgerRef, menuRef], close)
+
     return (
         <HeaderWrapper>
-            {isMobile ? (
+            {(!isMobile && !isDesktop) || isMobile ? (
                 <>
                     <NavWrapper>
                         <Logo />
@@ -33,7 +33,7 @@ const Header = () => {
                                 aria-label='Toggle navigation'
                                 onClick={toggle}
                             >
-                                <MenuIcon size='26' />
+                                <MenuIcon isNavOpen={isNavOpen} />
                             </Button>
                         </BurgerWrapper>
                     </NavWrapper>
@@ -53,35 +53,45 @@ const Header = () => {
         </HeaderWrapper>
     )
 }
-const HeaderWrapper = styled.header`
-    height: 10vh;
-    background: ${({ theme }) => theme.colors.primary};
-    align-items: center;
-    position: relative;
+export const HeaderWrapper = styled.header`
+    height: ${({ theme }) => theme.header};
+    width: 100%;
+    max-width: 1400px;
+    z-index: 5;
 `
-const NavWrapper = styled.nav`
-    padding: 0 ${({ theme }) => theme.padding.large};
+export const NavWrapper = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    @media only screen and (min-width: 900px) {
-        padding: 0 ${({ theme }) => theme.padding.large} 0 3em;
+    width: 90%;
+    margin: 0 auto;
+    @media only screen and (min-width: 400px) {
+        width: 80%;
     }
 `
-const MenuWrapper = styled.div`
+export const MenuWrapper = styled.div`
     display: flex;
     align-items: center;
     height: 100%;
 `
-const Button = styled.button`
+export const Button = styled.button`
     border: none;
     background: transparent;
-`
-const BurgerWrapper = styled.div`
     display: flex;
-    @media only screen and (min-width: 760px) {
+`
+export const BurgerWrapper = styled.div`
+    display: flex;
+    @media only screen and (min-width: 900px) {
         display: none;
     }
 `
+export const MenuIcon = styled(
+    ({ isNavOpen, ...props }: { isNavOpen: boolean }) =>
+        isNavOpen ? <MdClose {...props} /> : <MdMenu {...props} />
+)`
+    width: 1.8rem;
+    height: 1.8rem;
+`
+
 export default Header
