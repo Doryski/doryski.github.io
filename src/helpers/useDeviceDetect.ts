@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import getWindowWidth from './getWindowWidth'
 
 export default function useDeviceDetect(
     mobileBreakpoint: number,
     desktopBreakpoint: number
 ) {
-    const getWindowWidth = () =>
-        window.innerWidth ||
-        document.documentElement.clientWidth ||
-        document.body.clientWidth
-
     const isMobileWidth = () => getWindowWidth() < mobileBreakpoint
     const isDesktopWidth = () => getWindowWidth() > desktopBreakpoint
 
     const [isMobile, setIsMobile] = useState(isMobileWidth())
     const [isDesktop, setIsDesktop] = useState(isDesktopWidth())
+    const resizeListener = useRef(() => {})
 
+    resizeListener.current = () => {
+        setIsMobile(isMobileWidth())
+        setIsDesktop(isDesktopWidth())
+    }
     useEffect(() => {
-        const resizeListener = () => {
-            setIsMobile(isMobileWidth())
-            setIsDesktop(isDesktopWidth())
-        }
-        window.addEventListener('resize', resizeListener)
+        window.addEventListener('resize', resizeListener.current)
 
         return () => {
-            window.removeEventListener('resize', resizeListener)
+            window.removeEventListener(
+                'resize',
+                resizeListener.current
+            )
         }
     }, [])
     return { isMobile, isDesktop }
